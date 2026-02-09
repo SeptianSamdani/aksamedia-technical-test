@@ -19,9 +19,13 @@ export const ThemeProvider = ({ children }) => {
     const root = window.document.documentElement;
     
     const applyTheme = () => {
+      // Hapus class dark terlebih dahulu
+      root.classList.remove('dark');
+      
       if (theme === 'dark') {
         root.classList.add('dark');
       } else if (theme === 'light') {
+        // Pastikan class dark benar-benar dihapus
         root.classList.remove('dark');
       } else {
         // System preference
