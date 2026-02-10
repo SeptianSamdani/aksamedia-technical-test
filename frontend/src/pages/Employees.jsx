@@ -234,10 +234,13 @@ const Employees = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Employees</h1>
           <button
-            onClick={openCreateModal}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md"
+            onClick={() => navigate('/employees/create')}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center space-x-2 transition-colors duration-200 shadow-sm"
           >
-            Add Employee
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Tambah Karyawan</span>
           </button>
         </div>
 
@@ -276,28 +279,28 @@ const Employees = () => {
           <div className="text-center py-8 text-gray-900 dark:text-white">Loading...</div>
         ) : (
           <>
-            <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-700/50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        Image
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                        Foto
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        Name
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                        Nama
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        Phone
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                        Telepon
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        Division
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                        Divisi
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        Position
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                        Posisi
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        Actions
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                        Aksi
                       </th>
                     </tr>
                   </thead>
@@ -379,123 +382,6 @@ const Employees = () => {
               </div>
             )}
           </>
-        )}
-
-        {/* Modal */}
-        {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {modalMode === 'create' ? 'Add Employee' : 'Edit Employee'}
-                </h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleFormChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    />
-                    {formErrors.name && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Phone
-                    </label>
-                    <input
-                      type="text"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleFormChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    />
-                    {formErrors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Division
-                    </label>
-                    <select
-                      name="division"
-                      value={formData.division}
-                      onChange={handleFormChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    >
-                      <option value="">Select Division</option>
-                      {divisions.map((division) => (
-                        <option key={division.id} value={division.id}>
-                          {division.name}
-                        </option>
-                      ))}
-                    </select>
-                    {formErrors.division && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.division}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Position
-                    </label>
-                    <input
-                      type="text"
-                      name="position"
-                      value={formData.position}
-                      onChange={handleFormChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    />
-                    {formErrors.position && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.position}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Image {modalMode === 'edit' && '(Optional)'}
-                    </label>
-                    <input
-                      type="file"
-                      name="image"
-                      accept="image/*"
-                      onChange={handleFormChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    />
-                    {formErrors.image && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.image}</p>
-                    )}
-                  </div>
-
-                  <div className="flex space-x-2 pt-4">
-                    <button
-                      type="submit"
-                      className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md"
-                    >
-                      {modalMode === 'create' ? 'Create' : 'Update'}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={closeModal}
-                      className="flex-1 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 text-gray-700 dark:text-white px-4 py-2 rounded-md"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
         )}
       </div>
     </Layout>

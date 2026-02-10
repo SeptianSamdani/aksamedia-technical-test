@@ -213,6 +213,18 @@ export const employeeAPI = {
           reader.readAsDataURL(data.image);
         });
       }
+
+      // Validasi phone number format
+      if (data.phone && !/^[0-9+\-\s()]+$/.test(data.phone)) {
+        throw {
+          response: {
+            data: {
+              status: 'error',
+              message: 'Format nomor telepon tidak valid'
+            }
+          }
+        };
+      }
       
       // Find division
       const division = mockDivisions.find(d => d.id === data.division);

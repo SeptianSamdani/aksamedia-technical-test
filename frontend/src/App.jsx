@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Employees from './pages/Employees';
 import Divisions from './pages/Divisions';
 import Profile from './pages/Profile';
+import CreateEmployee from './pages/CreateEmployee';
 
 function App() {
   return (
@@ -50,6 +51,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/employees/create"
+              element={
+                <ProtectedRoute>
+                  <CreateEmployee />
                 </ProtectedRoute>
               }
             />
