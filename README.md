@@ -4,7 +4,7 @@ Aplikasi **Employee Management System** yang dibuat sebagai bagian dari **techni
 
 ## 🌐 Live Demo
 
-**Frontend (Demo Mode):** [https://aksamedia-technical-test-tan.vercel.app/](https://aksamedia-technical-test-tan.vercel.app/)
+**Frontend (Demo Mode):** [https://aksamedia-technical-test-three.vercel.app/](https://aksamedia-technical-test-three.vercel.app/)
 
 **Kredensial Login:**
 ```
