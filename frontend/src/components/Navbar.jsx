@@ -12,8 +12,28 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const dropdownRef = useRef(null);
   const themeDropdownRef = useRef(null);
+
+  // Detect actual dark mode state (handles 'system' theme properly)
+  useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    };
+
+    // Check on mount
+    checkDarkMode();
+
+    // Listen to theme changes (when class 'dark' added/removed from html)
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -49,7 +69,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-3">
-              {theme === 'dark' ? (
+              {isDarkMode ? (
                 <img 
                   src="https://aksamedia.co.id/assets/aksa-logo-white-2.webp" 
                   alt="Aksamedia Logo" 
